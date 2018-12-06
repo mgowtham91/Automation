@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.testdata.CREATESUBJECT"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.standard.page.StandardDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.testdata.CREATESTANDARD"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.beans.CreateStandardBean"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.standard.page.CreateStandardPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.login.page.ParentLoginPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.home.page.ParentHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.achievement.page.AchievementDetailsPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.section.page.SectionDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.section.page.CreateSectionPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.beans.CreateSectionBean"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.testdata.CREATESECTION"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.attendance.page.AttendanceDetailsPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.subject.page.SubjectDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.subject.page.CreateSubjectPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.data.provider.beans.CreateSubjectBean"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.timetable.page.StudentwiseTimetable"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.timetable.page.StudentTimetablePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.homework.page.HomeworkDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.homework.page.ViewHomeworkPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.exam.page.ExamDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.exam.page.ViewExamDetailsPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.exam.page.ViewExamSubjectMapping"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.exam.page.ExamSubjectMappingDetailsPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.inbox.page.ViewInboxDetailsPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.inbox.page.ViewInboxDetailPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.inbox.page.InboxDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.news.page.ViewNewsDetailPage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.news.page.NewsDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.holiday.page.HolidayListHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayDetails"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayCalendarHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.test.core.base.action.AbstractPageObject"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.FindBy"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewEventDetailsHomePage"/>
+<fullyQualifiedTypeName name="tech.hatlet.io.edulytixe.page.objects.holiday.page.EventDetailsHomePage"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.By"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,42 @@
+package tech.hatlet.io.edulytixe.page.objects.admin.home.page;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import tech.hatlet.io.edulytixe.page.objects.home.page.HomePage;
+import tech.hatlet.test.core.base.action.AbstractPageObject;
+import tech.hatlet.test.core.base.conf.HatletConfig.HatletConfigProperty;
+import tech.hatlet.test.core.base.utilities.WaitTool;
+
+public class AdminHomepage extends AbstractPageObject {
+
+	/**
+	 * Instantiates a new home page.
+	 *
+	 * @param driver the driver
+	 * @author ashokram
+	 */
+	public AdminHomepage(WebDriver driver) {
+		super(driver);
+		WaitTool.waitFor(driver, ExpectedConditions.visibilityOf(selectschool),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	}
+
+	
+	/** drop down. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/div[2]/div/span/span[1]/span/span[2]")
+	private WebElement dropdown;
+
+	/** select school. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/div[2]/div/span/span[1]/span/span[1]/span")
+	private WebElement selectschool;
+
+
+	public AdminHomepage selctschool() throws Exception {
+		click(dropdown);
+		WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(selectschool),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+		return click(dropdown, HomePage.class);
+	}
+}

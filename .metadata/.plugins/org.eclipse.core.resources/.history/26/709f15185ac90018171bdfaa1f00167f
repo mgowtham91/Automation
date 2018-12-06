@@ -1,0 +1,15 @@
+package abcd;
+
+public class sample {
+
+	int a=40;
+	String name;
+	
+
+	public static void main(String[] args) {
+		sample s1=new sample();
+		System.out.println(s1.a);
+		
+	}
+
+}

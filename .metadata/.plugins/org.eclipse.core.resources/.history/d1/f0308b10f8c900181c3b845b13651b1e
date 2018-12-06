@@ -1,0 +1,20 @@
+# Configuration parameters
+# Configure Type of the environment, Valid types are qat or uat or prod and give appropriate URL
+# Browser Type, Valid types chrome/firefox
+# OS Name - mac/win/linux
+# WebDriver Location, This is in resource folder point the correct driver with appropriate system's 32 or 64 bit
+--- 
+driver: 
+  browser: chrome
+  os: mac
+  webdriverPath:D:/Gowtham/hatlet-test-core/src/main/resources/webdrivers/chrome/windows/chromedriver
+environment: 
+  applicationUrl: "http://staging.technotackle.com/hatlet/admin/web/site/login"
+  type: qat
+testlink: 
+  apiKey: "9b1c0c0702880cfb242a2c83a048da45"
+  enableTestLinkUpdate: "false"
+  testLinkURLBaseURL: "http://172.20.10.2/testlink/lib/api/xmlrpc/v1/xmlrpc.php"
+  testPlanId: "14754"
+  buildId: "3"
+  buildName: "EDU-W-20180829"

@@ -1,0 +1,87 @@
+package tech.hatlet.io.edulytixe.tests.login;
+
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.AUTOMATION;
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.MANAGEMENT;
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.USER_LOGIN;
+
+import java.util.Map;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import tech.hatlet.gitlab.issue.locker.sterotype.IEdulytixeLabels;
+import tech.hatlet.io.edulytixe.data.provider.DataBeanFactory;
+import tech.hatlet.io.edulytixe.data.provider.IDataBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.CreateSectionBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.CreateStandardBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.CreateSubjectBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.EdulytixeBaseBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.LoginBean;
+import tech.hatlet.io.edulytixe.data.provider.testdata.CREATESECTION;
+import tech.hatlet.io.edulytixe.data.provider.testdata.CREATESTANDARD;
+import tech.hatlet.io.edulytixe.data.provider.testdata.CREATESUBJECT;
+import tech.hatlet.io.edulytixe.data.provider.testdata.LOGIN;
+import tech.hatlet.io.edulytixe.page.objects.home.page.HomePage;
+import tech.hatlet.io.edulytixe.page.objects.login.page.LoginPage;
+import tech.hatlet.io.edulytixe.page.objects.section.page.CreateSectionPage;
+import tech.hatlet.io.edulytixe.page.objects.section.page.SectionDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.standard.page.CreateStandardPage;
+import tech.hatlet.io.edulytixe.page.objects.standard.page.StandardDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.subject.page.CreateSubjectPage;
+import tech.hatlet.io.edulytixe.page.objects.subject.page.SubjectDetailsHomePage;
+import tech.hatlet.test.core.base.iinterface.HatletBrowserTestBase;
+import tech.hatlet.test.core.base.styrotype.annotations.ITestLinkReporter;
+import tech.hatlet.test.core.base.test.cases.status.HatletTestCaseResultListener;
+
+/**
+ * The Class TestEdulytixeWebLoginForManagement.
+ * 
+ * @author ashokram
+ */
+@Listeners(HatletTestCaseResultListener.class)
+@ITestLinkReporter(number = 0, name = "TestEdulytixeWebLoginForManagement", desc = "Test Edulytixe Web Login For Management")
+@IEdulytixeLabels(labels = { AUTOMATION, MANAGEMENT, USER_LOGIN })
+public class TestEdulytixeWebLoginForManagement extends HatletBrowserTestBase {
+
+	/**
+	 * Credentials.
+	 *
+	 * @author ashokram
+	 * @return the object[][]
+	 * @throws Exception the exception
+	 */
+	@DataProvider(name = "managementAuthentication")
+	public static Object[][] credentials() throws Exception {
+		return new Object[][] { { DataBeanFactory.createGroupOfLocalDataBean(LOGIN.MANAGEMENT, CREATESUBJECT.DEFAULT) } };
+	}
+
+	/**
+	 * Test edulytixe web login for management.
+	 *
+	 * @author ashokram
+	 * @param model the model
+	 * @throws Exception the exception
+	 */
+	@Test(testName = "testEdulytixeWebLoginForManagement", dataProvider = "managementAuthentication")
+	public void testEdulytixeWebLoginForManagement(Map<IDataBean, EdulytixeBaseBean> model) throws Exception {
+		LoginPage loginPage = new LoginPage(getWebDriver());
+		HomePage homePage = loginPage.login((LoginBean) model.get(LOGIN.MANAGEMENT));
+		
+//		SubjectDetailsHomePage subjectDetailsHomePage = homePage.selectSubject();
+//		CreateSubjectPage createSubjectPage = subjectDetailsHomePage.createSubject();
+//		createSubjectPage.createSubject((CreateSubjectBean) model.get(CREATESUBJECT.DEFAULT));
+	
+	
+		StandardDetailsHomePage standardDetailsHomePage = homePage.selectStandard();
+		CreateStandardPage createStandardPage = standardDetailsHomePage.createStandard();
+		createStandardPage.createStandard((CreateStandardBean) model.get(CREATESTANDARD.DEFAULT));
+	
+//		SectionDetailsHomePage sectionDetailsHomePage = homepage.selectSection();
+//		CreateSectionPage createSectionPage = sectionDetailsHomePage.createSection();
+//		createSectionPage.createSection((CreateSectionBean) model.get(CREATESECTION.DEFAULT));
+	}
+	
+	
+
+}

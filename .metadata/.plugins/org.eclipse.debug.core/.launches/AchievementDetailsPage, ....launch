@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.testng.eclipse.launchconfig">
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.testng.remote.RemoteTestNG"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="hatlet-edulytixe-page-objects"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+<mapAttribute key="org.testng.eclipse.ALL_CLASS_METHODS"/>
+<listAttribute key="org.testng.eclipse.CLASS_TEST_LIST">
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayDetails"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.home.page.HomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.home.page.ParentHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.news.page.NewsDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.exam.page.ExamDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.section.page.CreateSectionPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewEventDetailsPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.homework.page.HomeworkDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.inbox.page.ViewInboxDetailPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.standard.page.CreateStandardPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.login.page.LoginPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.timetable.page.StudentTimetablePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.subject.page.CreateSubjectPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.timetable.page.StudentwiseTimetable"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.subject.page.SubjectDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.attendance.page.AttendanceDetailsPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayCalendarHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.homework.page.ViewHomeworkPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.section.page.SectionDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.standard.page.StandardDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.subject.page.MangageSubjectPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.inbox.page.InboxDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.holiday.page.EventDetailsHomePage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.login.page.ParentLoginPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.exam.page.ViewExamDetailsPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.news.page.ViewNewsDetailPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.exam.page.ExamSubjectMappingDetailsPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.achievement.page.AchievementDetailsPage"/>
+<listEntry value="tech.hatlet.io.edulytixe.page.objects.holiday.page.HolidayListHomePage"/>
+</listAttribute>
+<listAttribute key="org.testng.eclipse.METHOD_TEST_LIST"/>
+<listAttribute key="org.testng.eclipse.PACKAGE_TEST_LIST"/>
+<stringAttribute key="org.testng.eclipse.PRE_DEFINED_LISTENERS" value=""/>
+<intAttribute key="org.testng.eclipse.TYPE" value="1"/>
+</launchConfiguration>

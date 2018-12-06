@@ -1,0 +1,27 @@
+package tech.hatlet.io.edulytixe.page.objects.homework.page;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import tech.hatlet.test.core.base.action.AbstractPageObject;
+import tech.hatlet.test.core.base.conf.HatletConfig.HatletConfigProperty;
+import tech.hatlet.test.core.base.utilities.WaitTool;
+
+public class HomeworkDetailsHomePage extends AbstractPageObject {
+
+	
+
+	public HomeworkDetailsHomePage(WebDriver driver) {
+		super(driver);
+		WaitTool.waitFor(driver, ExpectedConditions.visibilityOf(viewHomework),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	}
+
+	@FindBy(xpath="/html/body/div[1]/div[2]/section[2]/div/div/div/div/table/tbody/tr[1]/td[8]/a/span")
+	private WebElement viewHomework;
+	
+	
+	
+	
+}

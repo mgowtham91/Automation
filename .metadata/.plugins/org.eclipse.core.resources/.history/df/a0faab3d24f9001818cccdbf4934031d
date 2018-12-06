@@ -1,0 +1,81 @@
+package tech.hatlet.io.edulytixe.tests.login;
+
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.AUTOMATION;
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.PARENT;
+import static tech.hatlet.gitlab.issue.locker.labels.EdulytixeLabels.USER_LOGIN;
+
+import java.util.Map;
+
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import tech.hatlet.gitlab.issue.locker.sterotype.IEdulytixeLabels;
+import tech.hatlet.io.edulytixe.data.provider.DataBeanFactory;
+import tech.hatlet.io.edulytixe.data.provider.IDataBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.EdulytixeBaseBean;
+import tech.hatlet.io.edulytixe.data.provider.beans.LoginBean;
+import tech.hatlet.io.edulytixe.data.provider.testdata.LOGIN;
+import tech.hatlet.io.edulytixe.page.objects.home.page.ParentHomePage;
+import tech.hatlet.io.edulytixe.page.objects.login.page.ParentLoginPage;
+import tech.hatlet.test.core.base.iinterface.HatletBrowserTestBase;
+import tech.hatlet.test.core.base.styrotype.annotations.ITestLinkReporter;
+import tech.hatlet.test.core.base.test.cases.status.HatletTestCaseResultListener;
+
+/**
+ * The Class TestEdulytixeWebLoginForParent.
+ * 
+ * @author ashokram
+ */
+@Listeners(HatletTestCaseResultListener.class)
+@ITestLinkReporter(number = 0, name = "TestEdulytixeWebLoginForParent", desc = "Test Edulytixe Web Login For Parent")
+@IEdulytixeLabels(labels = { AUTOMATION, PARENT, USER_LOGIN })
+public class TestEdulytixeWebLoginForParent extends HatletBrowserTestBase {
+
+	/**
+	 * Credentials.
+	 *
+	 * @author ashokram
+	 * @return the object[][]
+	 * @throws Exception the exception
+	 */
+	@DataProvider(name = "parentAuthentication")
+	public static Object[][] credentials() throws Exception {
+		return new Object[][] { { DataBeanFactory.createGroupOfLocalDataBean(LOGIN.PARENT) } };
+	}
+
+	/**
+	 * Test edulytixe web login for parent.
+	 *
+	 * @author ashokram
+	 * @param model the model
+	 * @throws Exception the exception
+	 */
+	@SuppressWarnings("unused")
+	@Test(testName = "testEdulytixeWebLoginForParent", dataProvider = "parentAuthentication")
+//	public void testEdulytixeWebLoginForParent(Map<IDataBean, EdulytixeBaseBean> model) throws Exception {
+//		LoginPage loginPage = new LoginPage(getWebDriver());
+//		HomePage homePage = loginPage.login((LoginBean) model.get(LOGIN.PARENT));
+//		homePage.logout();
+//	}
+
+	public void testEdulytixeWebLoginForParent(Map<IDataBean, EdulytixeBaseBean> model) throws Exception {
+		ParentLoginPage parentloginPage = new ParentLoginPage(getWebDriver());
+		ParentHomePage parenthomePage = parentloginPage.login((LoginBean) model.get(LOGIN.PARENT));
+	
+		parenthomePage.viewHomework();
+		parenthomePage.AchievementPortal();
+		parenthomePage.AttendanceDetails();
+		parenthomePage.viewExamDetails();
+		parenthomePage.examSubjectMappingDetails();
+		parenthomePage.TimeTable();
+		parenthomePage.viewInboxDetail();
+		parenthomePage.ViewNewsDetail();
+		parenthomePage.viewHolidayDetails();
+		parenthomePage.viewHolidayCalendarPage();
+		parenthomePage.viewEventDetail();
+		
+		parenthomePage.logout();
+	}
+	
+}

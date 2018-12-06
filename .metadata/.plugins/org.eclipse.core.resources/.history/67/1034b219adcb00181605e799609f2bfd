@@ -1,0 +1,707 @@
+package tech.hatlet.test.core.base.action;
+
+import java.util.List;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import tech.hatlet.test.core.base.utilities.WaitTool;
+
+/**
+ * Base class for page objects.
+ *
+ * @author ashokram
+ */
+public abstract class AbstractPageObject {
+
+	/** The driver. */
+	private WebDriver driver;
+
+	/**
+	 * Instantiates a new abstract page object.
+	 *
+	 * @param driver the driver
+	 */
+	public AbstractPageObject(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
+	/**
+	 * Click.
+	 *
+	 * @param element the element
+	 */
+	protected void click(WebElement element) {
+		clickInternal(element);
+	}
+
+	/**
+	 * An implementation of click that does not perform frame switching before
+	 * clicking.
+	 * <p>
+	 * This method is useful in implementation of inner clicks inside fixtures. For
+	 * example, in a table fixture an inner click on a cell is performed by first
+	 * targeting the table, then determining the cell to click and targeting it, and
+	 * then clicking on the cell. The fixture implementation had already done the
+	 * targeting and so wishes to perform a click without the auto-targeting
+	 * performed by the base click method.
+	 *
+	 * @author ashokram
+	 * @param element the element to click on.
+	 */
+	protected void clickInCurrentFrame(WebElement element) {
+		clickInternal(element);
+	}
+
+	/**
+	 * A convenience method that performs a click and waits for a new page to load.
+	 *
+	 * @author ashokram
+	 * @param               <W> the generic type
+	 * @param element       the element to click on.
+	 * @param nextPageClass the page object class of the page loaded by the click.
+	 * @return an instance of the newly loaded page object.
+	 * @throws Exception on any failure to load the new page or create the page
+	 *                   object.
+	 */
+	protected <W extends AbstractPageObject> W click(WebElement element, Class<W> nextPageClass) throws Exception {
+		clickInternal(element);
+		return WaitTool.waitFor(driver, PageObjectExpectations.pageLoaded(nextPageClass),
+				WaitTool.getDefaultWait4Page());
+	}
+
+	/**
+	 * A convenience method that performs a click and waits for a WebElement to
+	 * display.
+	 *
+	 * @author ashokram
+	 * @param currentElement  the element to click on.
+	 * @param expectedElement the element expected to be displayed
+	 * @return an WebElement
+	 */
+	protected WebElement click(WebElement currentElement, WebElement expectedElement) {
+		clickInternal(currentElement);
+		return WaitTool.waitFor(driver, ExpectedConditions.visibilityOf(expectedElement),
+				WaitTool.getDefaultWait4Page());
+	}
+
+	/**
+	 * Click internal.
+	 *
+	 * @param element the element
+	 */
+	private void clickInternal(WebElement element) {
+		PageObjectHelper.click(driver, getElementName(element), element);
+	}
+
+	/**
+	 * A service method for Page Objects to determine if a check-box in a form is
+	 * checked.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form action=&quot;form_action.asp&quot; method=&quot;get&quot;&gt;
+	 *   Send Junk Mail: &lt;input type=&quot;checkbox&quot; id=&quot;junkMail&quot; /&gt;
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;junkMail&quot;)
+	 * WebElement junkMailElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Methods:
+	 * 
+	 * <pre>
+	 * public boolean isJunkMailChecked() {
+	 * 	return isChecked(junkMailElement);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the checkbox element
+	 * @return true, if is checked
+	 */
+	protected boolean isChecked(WebElement element) {
+		return PageObjectHelper.isChecked(driver, element);
+	}
+
+	/**
+	 * An implementation of isChecked that does not perform frame switching before
+	 * clicking.
+	 * <p>
+	 * This method is useful in implementation of inner clicks inside fixtures. For
+	 * example, in a table fixture an isChecked check on a cell is performed by
+	 * first targeting the table, then determining the cell to check and targeting
+	 * it, and then checking the cell. The fixture implementation had already done
+	 * the targeting and so wishes to perform a check without the auto-targeting
+	 * performed by the base isChecked method.
+	 *
+	 * @author ashokram
+	 * @param element the element to click on.
+	 * @return true, if is checked in current frame
+	 */
+	protected boolean isCheckedInCurrentFrame(WebElement element) {
+		return PageObjectHelper.isChecked(driver, element);
+	}
+
+	/**
+	 * A service method for Page Objects to set a checkbox in a form.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form action=&quot;form_action.asp&quot; method=&quot;get&quot;&gt;
+	 *   Send Junk Mail: &lt;input type=&quot;checkbox&quot; id=&quot;junkMail&quot; /&gt;
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;junkMail&quot;)
+	 * WebElement junkMailElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Methods:
+	 * 
+	 * <pre>
+	 * public void setJunkMailChecked(boolean checked) {
+	 * 	setChecked(junkMailElement, checked);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element        the checkbox element
+	 * @param checkRequested if <code>true</code> the check box is selected;
+	 *                       Otherwise, it is deselected.
+	 */
+	protected void setChecked(WebElement element, boolean checkRequested) {
+		PageObjectHelper.setChecked(driver, getElementName(element), element, checkRequested);
+	}
+
+	/**
+	 * An implementation of setChecked that does not perform frame switching before
+	 * clicking.
+	 * <p>
+	 * This method is useful in implementation of inner setChecked inside fixtures.
+	 * For example, in a table fixture an setChecked on a cell is performed by first
+	 * targeting the table, then determining the cell to setChecked and targeting
+	 * it, and then performing a setChecked on the cell. The fixture implementation
+	 * had already done the targeting and so wishes to perform a setChecked without
+	 * the auto-targeting performed by the base setChecked method.
+	 *
+	 * @author ashokram
+	 * @param element        the element to click on.
+	 * @param checkRequested the check requested
+	 */
+	protected void setCheckedInCurrentFrame(WebElement element, boolean checkRequested) {
+		PageObjectHelper.setChecked(driver, getElementNameInCurrentFrame(element), element, checkRequested);
+	}
+
+	/**
+	 * A service method for Page Objects to get which radio button is checked in a
+	 * form.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form&gt;
+	 *     &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;male&quot; /&gt; Male&lt;br/&gt;
+	 *     &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;female&quot; /&gt; Female
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(name = &quot;gender&quot;)
+	 * List&lt;WebElement&gt; genderElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Methods:
+	 * 
+	 * <pre>
+	 * public String getGenderChecked() {
+	 * 	return getRadioChecked(genderElement);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param radioButtonGroupElements the list of radio buttons to search
+	 * @return the string in the value attribute of the checked radio button
+	 * @throws NoSuchElementException if unable to find a radio button in the
+	 *                                elements provided.
+	 */
+	protected String getRadioChecked(List<WebElement> radioButtonGroupElements) {
+		return PageObjectHelper.getRadioChecked(driver, getElementName(radioButtonGroupElements),
+				radioButtonGroupElements);
+	}
+
+	/**
+	 * A service method for Page Objects to set a radio button in a group.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form&gt;
+	 *     &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;male&quot; /&gt; Male&lt;br/&gt;
+	 *     &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;female&quot; /&gt; Female
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(name = &quot;gender&quot;)
+	 * List&lt;WebElement&gt; genderElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Methods:
+	 * 
+	 * <pre>
+	 * public void setGenderChecked(String value) {
+	 * 	setRadioChecked(genderElement, value);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param radioButtonGroupElements the list of radio buttons in the group.
+	 * @param value                    the value attribute of the radio button to
+	 *                                 select.
+	 */
+	protected void setRadioChecked(List<WebElement> radioButtonGroupElements, String value) {
+		PageObjectHelper.setRadioChecked(driver, getElementName(radioButtonGroupElements), radioButtonGroupElements,
+				value);
+	}
+
+	/**
+	 * A service method for Page Objects to an HTML Select type object (both for
+	 * lists and drop downs). This method for accessing and mutating the select
+	 * object were not included directly here, as there are quite a few, and too
+	 * many methods would have to be defined for each element in each Page Object.
+	 * 
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;select id=&quot;make&quot;&gt;
+	 *   &lt;option&gt;Volvo&lt;/option&gt;
+	 *   &lt;option&gt;Saab&lt;/option&gt;
+	 *   &lt;option&gt;Mercedes&lt;/option&gt;
+	 *   &lt;option&gt;Audi&lt;/option&gt;
+	 * &lt;/select&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;make&quot;)
+	 * WebElement makeElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Method:
+	 * 
+	 * <pre>
+	 * public SelectFixture getMake() {
+	 * 	return getSelectObject(makeElement);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the select element
+	 * @return the object for manipulating this select object. This object remains
+	 *         valid as long as the containing Page Object remains valid (not
+	 *         including JavaScript dynamic editing of DOM)
+	 */
+	protected SelectFixture getSelectObject(WebElement element) {
+		return new SelectFixture(this, element, getElementName(element));
+	}
+
+	/**
+	 * A service method for Page Objects to return a simple table fixture for an
+	 * HTML Table type object.
+	 *
+	 * @author ashokram
+	 * @param                      <W> the generic type
+	 * @param driver               the WebDriver instance used by this page.
+	 * @param columnHeaderElements the list of table column header cell elements
+	 * @param cellElements         the list of data cell elements
+	 * @return the fixture for manipulating the table.
+	 */
+	@SuppressWarnings("unchecked")
+	protected <W extends AbstractPageObject> TableFixture<W> getSimpleTableObject(WebDriver driver,
+			List<WebElement> columnHeaderElements, List<WebElement> cellElements) {
+		return new TableFixture<W>((W) this, columnHeaderElements, cellElements);
+	}
+
+	/**
+	 * A service method for Page Objects to get the visible (i.e. not hidden by CSS)
+	 * innerText of this element, including sub-elements, without any leading or
+	 * trailing whitespace.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given: &lt;H1&gt;.My Application&lt;/H1&gt;
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(tagName = &quot;H1&quot;)
+	 * WebElement applicationTitleElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Method:
+	 * 
+	 * <pre>
+	 * public String getApplicationTitle() {
+	 * 	return getDisplayText(applicationTitleElement);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @return The innerText of this element.
+	 */
+	protected String getDisplayText(WebElement element) {
+		return PageObjectHelper.getDisplayText(driver, element);
+	}
+
+	/**
+	 * A service method for Page Objects to get the visible (i.e. not hidden by CSS)
+	 * innerText of this element, including sub-elements, without any leading or
+	 * trailing whitespace.
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @return The innerText of this element as an <code>int</code>.
+	 */
+	protected int getDisplayTextAsInt(WebElement element) {
+		return PageObjectHelper.getDisplayTextAsInt(driver, element);
+	}
+
+	/**
+	 * Set type content of an input text field.
+	 * <p>
+	 * WebDriver doesn't normally clear these before typing, but this method does
+	 * that first. It also sends a tab key to move the focus out of the element, so
+	 * any JavaScript it invoked as well.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form action=&quot;form_action.asp&quot; method=&quot;get&quot;&gt;
+	 *   First name: &lt;input type=&quot;text&quot; id=&quot;fname&quot; /&gt;
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;fname&quot;)
+	 * WebElement firstNameElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Method:
+	 * 
+	 * <pre>
+	 * public void setFirstName(String firstName) {
+	 * 	setInputText(firstNameElement, firstName);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @param text    the text
+	 */
+	protected void setInputText(WebElement element, String text) {
+		PageObjectHelper.setInputText(driver, getElementName(element), element, text);
+	}
+
+	/**
+	 * Add type content to an input text field
+	 * <p>
+	 * This method adds text to an input field without clearing existing content.
+	 * Focus will remain on the input element.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form action=&quot;form_action.asp&quot; method=&quot;get&quot;&gt;
+	 *   First name: &lt;input type=&quot;text&quot; id=&quot;fname&quot; /&gt;
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;fname&quot;)
+	 * WebElement firstNameElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Method:
+	 * 
+	 * <pre>
+	 * public void setFirstName(String firstName) {
+	 * 	addTextToInputField(firstNameElement, firstName);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @param text    the text
+	 */
+	protected void addTextToInputField(WebElement element, String text) {
+		PageObjectHelper.addTextToInputField(driver, getElementName(element), element, text);
+	}
+
+	/**
+	 * Get the content of an input text field.
+	 * <p>
+	 * Usage example:
+	 * <ul>
+	 * <li>Given:
+	 * 
+	 * <pre>
+	 * &lt;form action=&quot;form_action.asp&quot; method=&quot;get&quot;&gt;
+	 *   First name: &lt;input type=&quot;text&quot; id=&quot;fname&quot; /&gt;
+	 * &lt;/form&gt;
+	 * </pre>
+	 * 
+	 * <li>Using:
+	 * 
+	 * <pre>
+	 * &#064;FindBy(id = &quot;fname&quot;)
+	 * WebElement firstNameElement;
+	 * </pre>
+	 * 
+	 * <li>Implement Method:
+	 * 
+	 * <pre>
+	 * public String getFirstName() {
+	 * 	return getInputText(firstNameElement);
+	 * }
+	 * </pre>
+	 * 
+	 * </ul>
+	 *
+	 * @author ashokram
+	 * @param element the element identifying the text field.
+	 * @return the text in the text field
+	 */
+	protected String getInputText(WebElement element) {
+		return PageObjectHelper.getInputText(driver, element);
+	}
+
+	/**
+	 * Is this element currently displayed or not? This method avoids the problem of
+	 * having to parse an element's "style" attribute.
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @return Whether or not the element is displayed
+	 */
+	protected boolean isDisplayed(WebElement element) {
+		return PageObjectHelper.isDisplayed(driver, element);
+	}
+
+	/**
+	 * Is the element currently present on the page? This method will return true
+	 * even if the element is invisible.
+	 *
+	 * @author ashokram
+	 * @param by the by
+	 * @return Whether or not the element is present
+	 */
+	protected boolean isElementPresent(By by) {
+		return PageObjectHelper.isElementPresent(driver, by);
+	}
+
+	/**
+	 * Is the element currently enabled or not? This will generally return true for
+	 * everything but disabled input elements.
+	 *
+	 * @author ashokram
+	 * @param element the element
+	 * @return True if the element is enabled, false otherwise.
+	 */
+	protected boolean isEnabled(WebElement element) {
+		return PageObjectHelper.isEnabled(driver, element);
+	}
+
+	/**
+	 * Determine is a text string is anywhere on the current page.
+	 *
+	 * @author ashokram
+	 * @param string any string
+	 * @return <code>true</code> if found; Otherwise, <code>false</code>
+	 */
+	protected boolean isStringOnPage(String string) {
+		return PageObjectHelper.isStringOnPage(driver, string);
+	}
+
+	/**
+	 * Determine is regex string pattern matches any substring on the current page.
+	 *
+	 * @author ashokram
+	 * @param regex any valid regex pattern
+	 * @return <code>true</code> if found; Otherwise, <code>false</code>
+	 */
+	protected boolean isPatternOnPage(String regex) {
+		return PageObjectHelper.isPatternOnPage(driver, regex);
+	}
+
+	/**
+	 * A service method for Page Objects to switch to different Window or Pop-up
+	 * Window then the default, after clicking on a button or link. This method will
+	 * wait the default number of seconds for the window to materialize, and
+	 * switches to it.
+	 *
+	 * @author ashokram
+	 * @param titleStart the title of the target windows starts with this String.
+	 * @throws TimeoutException if the page does not materialize in time.
+	 */
+	protected void switchToWindow(final String titleStart) throws TimeoutException {
+		PageObjectHelper.switchToWindow(driver, titleStart);
+	}
+
+	/**
+	 * A service method for Page Objects to switch to different Window or Pop-up
+	 * Window then the default, after clicking on a button or link. This method will
+	 * wait up for the window to materialize, and switches to it.
+	 *
+	 * @author ashokram
+	 * @param titleStart the title of the target windows starts with this String.
+	 * @param seconds    the number of seconds (maximum) to wait for the window to
+	 *                   materialize.
+	 * @throws TimeoutException if the page does not materialize in time.
+	 */
+	protected void switchToWindow(final String titleStart, final int seconds) throws TimeoutException {
+		PageObjectHelper.switchToWindow(driver, titleStart, seconds);
+	}
+
+	/**
+	 * A service method for Page Objects to switch to an Alert in the current
+	 * Window. This method will wait for the default number of seconds for the alert
+	 * to materialize, and switches to it.
+	 *
+	 * @author ashokram
+	 * @return the alert
+	 * @throws TimeoutException if the alert does not materialize in time.
+	 */
+	protected Alert switchToAlert() throws TimeoutException {
+		return PageObjectHelper.switchToAlert(driver);
+	}
+
+	/**
+	 * A service method for Page Objects to switch to an Alert in the current
+	 * window. This method will wait up for the alert to materialize, and switches
+	 * to it.
+	 *
+	 * @author ashokram
+	 * @param seconds the number of seconds (maximum) to wait for the alert to
+	 *                materialize.
+	 * @return the alert
+	 * @throws TimeoutException if the alert does not materialize in time.
+	 */
+	protected Alert switchToAlert(final int seconds) throws TimeoutException {
+		return PageObjectHelper.switchToAlert(driver, seconds);
+	}
+
+	/**
+	 * Get the name of a WebElement object. This is by default the field name
+	 * declaring the element.
+	 *
+	 * @author ashokram
+	 * @param element the WebElement whose name is requested.
+	 * @return the name
+	 */
+	protected String getElementName(WebElement element) {
+		return PageObjectHelper.getFindByElementName(this, element);
+	}
+
+	/**
+	 * Get the name of a list of WebElement object. This is by default the field
+	 * name declaring the list.
+	 *
+	 * @author ashokram
+	 * @param elements the list of WebElement whose name is requested.
+	 * @return the name
+	 */
+	protected String getElementName(List<WebElement> elements) {
+		return PageObjectHelper.getFindByElementName(this, elements);
+	}
+
+	/**
+	 * Get the name of a WebElement object. This is by default the field name
+	 * declaring the element.
+	 *
+	 * @author ashokram
+	 * @param element the WebElement whose name is requested.
+	 * @return the name
+	 */
+	protected String getElementNameInCurrentFrame(WebElement element) {
+		return PageObjectHelper.getFindByElementName(this, element);
+	}
+
+	/**
+	 * Get the name of a list of WebElement object. This is by default the field
+	 * name declaring the list.
+	 *
+	 * @author ashokram
+	 * @param elements the list of WebElement whose name is requested.
+	 * @return the name
+	 */
+	protected String getElementNameInCurrentFrame(List<WebElement> elements) {
+		return PageObjectHelper.getFindByElementName(this, elements);
+	}
+
+	/**
+	 * Gets the driver.
+	 *
+	 * @return the driver
+	 * @author ashokram
+	 */
+	public WebDriver getDriver() {
+		return driver;
+	}
+}

@@ -1,0 +1,5 @@
+package tech.hatlet.io.edulytixe.page.objects.homework.page;
+
+public class ViewHomeworkPage {
+
+}

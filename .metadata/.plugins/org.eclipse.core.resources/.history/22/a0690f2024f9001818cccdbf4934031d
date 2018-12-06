@@ -1,0 +1,328 @@
+package tech.hatlet.io.edulytixe.page.objects.home.page;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import tech.hatlet.io.edulytixe.page.objects.achievement.page.AchievementDetailsPage;
+import tech.hatlet.io.edulytixe.page.objects.attendance.page.AttendanceDetailsPage;
+import tech.hatlet.io.edulytixe.page.objects.exam.page.ExamDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.exam.page.ExamSubjectMappingDetailsPage;
+import tech.hatlet.io.edulytixe.page.objects.exam.page.ViewExamDetailsPage;
+import tech.hatlet.io.edulytixe.page.objects.holiday.page.EventDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.holiday.page.HolidayListHomePage;
+import tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewEventDetailsPage;
+import tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayCalendarHomePage;
+import tech.hatlet.io.edulytixe.page.objects.holiday.page.ViewHolidayDetails;
+import tech.hatlet.io.edulytixe.page.objects.homework.page.HomeworkDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.homework.page.ViewHomeworkPage;
+import tech.hatlet.io.edulytixe.page.objects.inbox.page.InboxDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.inbox.page.ViewInboxDetailPage;
+import tech.hatlet.io.edulytixe.page.objects.login.page.ParentLoginPage;
+import tech.hatlet.io.edulytixe.page.objects.news.page.NewsDetailsHomePage;
+import tech.hatlet.io.edulytixe.page.objects.news.page.ViewNewsDetailPage;
+import tech.hatlet.io.edulytixe.page.objects.timetable.page.StudentTimetablePage;
+import tech.hatlet.test.core.base.action.AbstractPageObject;
+import tech.hatlet.test.core.base.conf.HatletConfig.HatletConfigProperty;
+import tech.hatlet.test.core.base.utilities.WaitTool;
+
+public class ParentHomePage extends AbstractPageObject {
+
+	/**
+	 * Instantiates a new home page.
+	 *
+	 * @param driver the driver
+	 * @author ashokram
+	 */
+	public ParentHomePage(WebDriver driver) {
+		super(driver);
+		WaitTool.waitFor(driver, ExpectedConditions.visibilityOf(logo),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+}
+	/** The class accordion. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[2]/a/span[1]")
+	private WebElement classAccordion;
+	
+	/** The Homework details label. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[2]/ul/li/a/span")
+	private WebElement HomeworkDetails;
+	
+	
+	/** The Student accordion. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[3]/a/span[1]")
+	private WebElement studentAccordion;
+	
+	/** The achievement details label. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[3]/ul/li[1]/a/span")
+	private WebElement achievementDetails;
+	
+	/** The attendance details label. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[3]/ul/li[2]/a/span")
+	private WebElement attendanceDetails;
+	
+	
+	/** The Exam Accordion. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[4]/a")
+	private WebElement examAccordion;
+	
+	/** The Exam Details. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[4]/ul/li[1]/a/span")
+	private WebElement examDetails;
+	
+	/** The Exam subject mapping. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[4]/ul/li[2]/a/span")
+	private WebElement examSubjectMapping;
+	
+	/** The Exam mark details. */
+	@FindBy(xpath = "/html/body/div[1]/aside/section/ul/li[4]/ul/li[3]/a/span")
+	private WebElement examMarkDetails;
+	
+	
+	/** The timetable Accordion. */
+	@FindBy(xpath= "/html/body/div[1]/aside/section/ul/li[5]/a")
+	private WebElement timetableAccordion;
+	
+	/** The studentwiseTT. */
+	@FindBy(xpath ="/html/body/div[1]/aside/section/ul/li[5]/ul/li/a/span")
+	private WebElement studentwiseTT;
+	
+	/** The communication Accordion. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[6]/a/span[1]")
+	private WebElement communicationAccordion;
+	
+	/** The inbox details. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[6]/ul/li[1]/a/span")
+	private WebElement inboxDetails;
+	
+	/** The news details. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[6]/ul/li[2]/a/span")
+	private WebElement newsDetails;
+	
+	/** The QA portal. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[6]/ul/li[3]/a")
+	private WebElement QAportal;
+	
+	/** The Settings. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[7]/a/span[1]")
+	private WebElement settingsAccordion;
+	
+	/** The Holiday list. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[7]/ul/li[1]/a/span")
+	private WebElement holidayList;
+	
+	/** The Holiday calendar view. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[7]/ul/li[2]/a/span")
+	private WebElement holidayCalendarView;
+	
+	/** The Event Details. */
+	@FindBy(xpath="/html/body/div[1]/aside/section/ul/li[7]/ul/li[3]/a/span")
+	private WebElement eventDetails;
+	
+	/** The profile icon. */
+	@FindBy(xpath = "/html/body/div[1]/header/nav/div[2]/ul/li[2]/a/span")
+	private WebElement profileIcon;
+	
+	/** The logo. */
+	@FindBy(xpath = "/html/body/div[1]/header/a/span[2]/img")
+	private WebElement logo;
+	
+	/** The signout. */
+	@FindBy(xpath = "/html/body/div[1]/header/nav/div[2]/ul/li[2]/ul/li[2]/div/a")
+	private WebElement signout;
+	
+	
+	
+	/**
+	 * Logout method.
+	 *
+	 * @author ashokram
+	 * @param loginBean the login bean
+	 * @return the login page
+	 * @throws Exception the exception
+	 */
+	
+	
+	public ParentLoginPage logout() throws Exception {
+		click(profileIcon);
+		WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(logo),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+		return click(signout, ParentLoginPage.class);
+	}
+	
+	
+	
+	/**
+	 * 
+	 * 
+	 * @return the Homework details home page
+	 * @throws Exception
+	 */
+	
+	public ViewHomeworkPage viewHomework() throws Exception {
+		click(classAccordion);
+		WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(HomeworkDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+		HomeworkDetailsHomePage homeworkDetailsHomePage = click(HomeworkDetails, HomeworkDetailsHomePage.class);
+		return homeworkDetailsHomePage.viewHomeworkDetails();
+		
+	}
+	
+
+	/**
+	 * 
+	 * 
+	 * @return the Achievement details home page
+	 * @throws Exception
+	 */
+   public AchievementDetailsPage AchievementPortal() throws Exception {
+	   click(studentAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(achievementDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	   return click(achievementDetails,AchievementDetailsPage.class);
+	   
+
+   }
+   
+   
+   /**
+	 * 
+	 * 
+	 * @return the Achievement details home page
+	 * @throws Exception
+	 */
+   
+   public AttendanceDetailsPage AttendanceDetails() throws Exception {
+	   click(studentAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(attendanceDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	   return click(attendanceDetails,AttendanceDetailsPage.class);
+	   
+   
+   }
+   
+   
+   
+   /**
+  	 * 
+  	 * 
+  	 * @return the Timetable details  page
+  	 * @throws Exception
+  	 */
+   
+   public StudentTimetablePage TimeTable() throws Exception {
+	   click(timetableAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(studentwiseTT),
+			   HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());	 
+	   return click(studentwiseTT,StudentTimetablePage.class);
+   }
+   /**
+ 	 * 
+ 	 * 
+ 	 * @return the Exam details  page
+ 	 * @throws Exception
+ 	 */
+   
+   public ViewExamDetailsPage viewExamDetails() throws Exception {
+		click(examAccordion);
+		WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(examDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+		ExamDetailsHomePage examDetailsHomePage = click(examDetails, ExamDetailsHomePage.class);
+		return examDetailsHomePage.viewExamDetails();
+		
+	}
+   
+   /**
+	 * 
+	 * 
+	 * @return The Exam subject mapping
+	 * @throws Exception
+	 */
+   
+   public ExamSubjectMappingDetailsPage examSubjectMappingDetails() throws Exception {
+	   click(examAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(examSubjectMapping),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	   return click(examSubjectMapping,ExamSubjectMappingDetailsPage.class);
+	   
+   
+   }
+   
+   /**
+  	 * 
+  	 * 
+  	 * @return The View inbox Details
+  	 * @throws Exception
+  	 */
+   public ViewInboxDetailPage viewInboxDetail() throws Exception {
+		click(communicationAccordion);
+		WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(inboxDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+		InboxDetailsHomePage inboxDetailsHomePage = click(inboxDetails, InboxDetailsHomePage.class);
+		return inboxDetailsHomePage.viewInboxDetail();
+		
+	}
+   /**
+ 	 * 
+ 	 * 
+ 	 * @return The View news Details
+ 	 * @throws Exception
+ 	 */
+   public ViewNewsDetailPage ViewNewsDetail() throws Exception {
+	   click(communicationAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(newsDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt()); 
+	   NewsDetailsHomePage newsDetailsHomepage = click(newsDetails,NewsDetailsHomePage.class);
+	   return newsDetailsHomepage.viewNewsDetail();
+   }
+   /**
+ 	 * 
+ 	 * 
+ 	 * @return The View holiday list
+ 	 * @throws Exception
+ 	 */
+   			 
+   public ViewHolidayDetails viewHolidayDetails() throws Exception {
+	   click(settingsAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(holidayList),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt()); 
+	   HolidayListHomePage holidayListHomePage = click(holidayList,HolidayListHomePage.class);
+	   return holidayListHomePage.viewHolidayDetails();
+   }
+   
+   /**
+	 * 
+	 * 
+	 * @return The View holiday calendar page
+	 * @throws Exception
+	 */
+   public ViewHolidayCalendarHomePage viewHolidayCalendarPage() throws Exception {
+	   click(settingsAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(holidayCalendarView),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt()); 
+        return click(holidayCalendarView, ViewHolidayCalendarHomePage.class);
+   }
+
+   /**
+	 * 
+	 * 
+	 * @return The View event details page
+	 * @throws Exception
+	 */
+
+  public ViewEventDetailsPage viewEventDetail() throws Exception {
+	  click(settingsAccordion);
+	   WaitTool.waitFor(getDriver(), ExpectedConditions.visibilityOf(eventDetails),
+				HatletConfigProperty.TIMEOUT_VALUE.getPropertyAsInt());
+	   EventDetailsHomePage eventDetailsHomePage = click (eventDetails,EventDetailsHomePage.class);
+	   return eventDetailsHomePage.viewEventDetails();
+
+  }
+
+
+}
+
+   
+
+
+
+
